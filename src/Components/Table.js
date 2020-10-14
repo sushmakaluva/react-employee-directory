@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
-import API from '../utils/API';
+import axios from "axios";
+
+// import API from '../utils/API';
 
 class Table extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            employees: []
-        }
-    }
+    state = {
+        isLoading: true,
+        employees: [],
+        error: null
+    };
 
     componentDidMount() {
-        API.usersList()
-            .then(response => response.json())
-            .then(response => this.setState({ employees: response.results }))
-            .catch(err => console.log(err));
+        const apiUrl = 'https://randomuser.me/api/?results=50';
+        axios({ method: 'get', url: `${apiUrl}` })
+            .then(response => {
+                this.setState({
+                    employees: response.data.results
+                })
+            })
+            .then(response =>
+                console.log(this.state.employees)
+            );
     }
 
+
     render() {
+        const { employees } = this.state;
+        console.log("******", employees)
         return (
             <table className="table table-bordered table-striped table-hover table-condensed" >
                 <thead>
@@ -29,21 +39,26 @@ class Table extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.employees.map(function (User) {
-                        return (
-                            <tr key={User.id}>
-                                <td>
-                                    <img src={User.picture.thumbnail} alt="profile pic"></img>
-                                </td>
-                                <td>{User.name.first + " " + User.name.last}</td>
-                                <td>{User.phone}</td>
-                                <td>{User.email}</td>
-                                <td>{User.dob.date}</td>
-                            </tr>
-                        );
-                    })
+                    {
+                        employees.map((employee) => {
+                            return (
+                                <tr key={employee.name.first + "-" + employee.name.last}>
+                                    <td >{
+                                        <img
+                                            src={employee.picture.medium}
+                                            alt={"profile image for " + employee.name.first + " " + employee.name.last}
+                                            className="img-responsive"
+                                        />
+                                    }
+                                    </td>
+                                    <td>{employee.name.first} {employee.name.last}</td>
+                                    <td>{employee.phone}</td>
+                                    <td>{employee.email}</td>
+                                    <td>{employee.dob.date}</td>
+                                </tr>
+                            );
+                        })
                     }
-
                 </tbody>
             </table>
         );
