@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
+
 // import API from '../utils/API';
 
 class Table extends Component {
@@ -21,7 +22,7 @@ class Table extends Component {
             .then(response =>
                 console.log(this.state.employees)
             );
-    }
+    };
 
 
     render() {
@@ -54,7 +55,7 @@ class Table extends Component {
                                     <td>{employee.name.first} {employee.name.last}</td>
                                     <td>{employee.phone}</td>
                                     <td>{employee.email}</td>
-                                    <td>{employee.dob.date}</td>
+                                    <td>{(employee.dob.date).split('T')[0]}</td>
                                 </tr>
                             );
                         })
