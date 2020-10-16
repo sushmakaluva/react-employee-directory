@@ -10,8 +10,9 @@ class App extends Component {
     isLoading: true,
     employees: [],
     filteredEmployees: [],
+    sortOrder: "descending",
     error: null,
-    searchInput: ''
+    searchInput: '',
   };
 
   componentDidMount() {
@@ -19,7 +20,8 @@ class App extends Component {
       .then(response => {
         this.setState({
           employees: response.data.results,
-          filteredEmployees: response.data.results
+          filteredEmployees: response.data.results,
+          sortedEmployees: response.data.results,
         })
       })
   };
@@ -27,6 +29,60 @@ class App extends Component {
   onChange = (e) => {
     this.searchFunction(e.target.value);
     this.setState({ searchInput: e.target.value })
+  }
+
+  onClick = (e, sortKey) => {
+    this.sortFunction(e, sortKey);
+  }
+
+  sortFunction = (sortKey) => {
+    console.log("passed sortKey is", sortKey);
+    let result;
+    if (this.state.sortOrder === "descending") {
+      switch (sortKey) {
+        case 'name':
+          result = this.state.employees.sort(function (a, b) { return ('' + a.name.first).localeCompare(b.name.first); });
+          break;
+        case 'phone':
+          result = this.state.employees.sort(function (a, b) { return ('' + a.phone).localeCompare(b.phone); });
+          break;
+        case 'email':
+          result = this.state.employees.sort(function (a, b) { return ('' + a.email).localeCompare(b.email); });
+          break;
+        case 'dob':
+          result = this.state.employees.sort(function (a, b) { return ('' + a.dob.date).localeCompare(b.dob.date); });
+          break;
+        default:
+          return;
+      }
+      this.setState({
+        filteredEmployees: result,
+        sortOrder: "ascending"
+      })
+    }
+    else if (this.state.sortOrder === "ascending") {
+      switch (sortKey) {
+        case 'name':
+          result = this.state.employees.sort(function (a,b) { return ('' + b.name.first).localeCompare(a.name.first); });
+          break;
+        case 'phone':
+          result = this.state.employees.sort(function (a, b) { return ('' + b.phone).localeCompare(a.phone); });
+          break;
+        case 'email':
+          result = this.state.employees.sort(function (a, b) { return ('' + b.email).localeCompare(a.email); });
+          break;
+        case 'dob':
+          result = this.state.employees.sort(function (a, b) { return ('' + b.dob.date).localeCompare(a.dob.date); });
+          break;
+        default:
+          return;
+      }
+      this.setState({
+        filteredEmployees: result,
+        sortOrder: "descending"
+      })
+    }
+
 
   }
 
@@ -46,8 +102,6 @@ class App extends Component {
         filteredEmployees: this.state.employees
       })
     }
-
-
   }
 
   render() {
@@ -59,7 +113,11 @@ class App extends Component {
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           searchFunction={this.searchFunction} />
-        <Table employees={this.state.filteredEmployees} />
+        <Table
+          employees={this.state.filteredEmployees}
+          onClick={this.onClick}
+          pointerSymbol={this.state.pointerSymbol}
+        />
       </div>
     );
   }

@@ -2,9 +2,8 @@ import React from 'react';
 
 
 function Table(props) {
-    console.log(props);
     const { employees } = props;
-    console.log("Employee List", employees);
+    // console.log("Employee List", employees);
     return (
         <div className="datatable">
             <table
@@ -14,11 +13,11 @@ function Table(props) {
                 }} >
                 <thead className="thead-dark">
                     <tr>
-                        <th style={{ width: '10%' }}>Image <span className="pointer"></span></th>
-                        <th style={{ width: '10%' }}>Name <span className="pointer"></span></th>
-                        <th style={{ width: '20%' }}>Phone <span className="pointer"></span></th>
-                        <th style={{ width: '20%' }}>Email <span className="pointer"></span></th>
-                        <th style={{ width: '10%' }}>DOB <span className="pointer"></span></th>
+                        <th style={{ width: '10%' }}>Image <span style={{ cursor: "pointer" }} onClick={props.onClick.bind(this, 'image')} className="pointer"></span></th>
+                        <th style={{ width: '10%' }}>Name <span style={{ cursor: "pointer" }} onClick={props.onClick.bind(this, 'name')} className="pointer">&#9660;</span></th>
+                        <th style={{ width: '20%' }}>Phone <span style={{ cursor: "pointer" }} onClick={props.onClick.bind(this, 'phone')} className="pointer">&#9660;</span></th>
+                        <th style={{ width: '20%' }}>Email <span style={{ cursor: "pointer" }} onClick={props.onClick.bind(this, 'email')} className="pointer">&#9660;</span></th>
+                        <th style={{ width: '10%' }}>DOB <span style={{ cursor: "pointer" }} onClick={props.onClick.bind(this, 'dob')} className="pointer">&#9660;</span></th>
                     </tr>
                 </thead>
                 <tbody>
