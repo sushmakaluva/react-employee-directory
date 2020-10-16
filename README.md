@@ -9,12 +9,12 @@ As a user, I want to be able to view my entire employee directory at once so tha
 ## Website URL
 https://sushmakaluva.github.io/react-employee-directory/
 
+## Website screenshot
+
+![alt text](/src/directory_pic.png)
+
 ## API used:
 randomuser.me
 
 ## Business Context
 An employee or manager would benefit greatly from being able to view non-sensitive data about other employees. It would be particularly helpful to be able to filter employees by name.
-
-## Website screenshot
-
-![alt text](/src/directory_pic.png)
