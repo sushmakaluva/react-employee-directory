@@ -8,8 +8,6 @@ As a user, I want to be able to view my entire employee directory at once so tha
 
 ## Website URL
 
-
-
 ## API used:
 randomuser.me
 
@@ -19,4 +17,3 @@ An employee or manager would benefit greatly from being able to view non-sensiti
 ### Main page screenshot
 
 ![alt text](/src/directory_pic.png)
-
