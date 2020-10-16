@@ -14,6 +14,6 @@ randomuser.me
 ## Business Context
 An employee or manager would benefit greatly from being able to view non-sensitive data about other employees. It would be particularly helpful to be able to filter employees by name.
 
-### Main page screenshot
+## Website screenshot
 
 ![alt text](/src/directory_pic.png)
