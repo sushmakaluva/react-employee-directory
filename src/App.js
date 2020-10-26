@@ -106,7 +106,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{backgroundImage: "linear-gradient(120deg, #f6d365 0%, #fda085 100%);"}}>
         <Header />
         <SearchBar
           searchInput={this.state.searchInput}
